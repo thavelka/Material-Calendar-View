@@ -155,13 +155,12 @@ public class CalendarPageAdapter extends PagerAdapter {
         mCalendarGridView.setOnItemClickListener(calendarDayAdapter);
     }
 
-    @Override
-    public void notifyDataSetChanged() {
+    public void refreshEvents() {
         if (mContainer != null) {
             for (int i = 0; i < mContainer.getChildCount(); i++) {
                 View child = mContainer.getChildAt(i);
                 if (child instanceof CalendarGridView && ((CalendarGridView) child).getAdapter() != null) {
-                    ((CalendarDayAdapter) ((CalendarGridView) child).getAdapter()).notifyDataSetChanged();
+                    ((CalendarDayAdapter) ((CalendarGridView) child).getAdapter()).refreshEvents();
                 }
             }
         }

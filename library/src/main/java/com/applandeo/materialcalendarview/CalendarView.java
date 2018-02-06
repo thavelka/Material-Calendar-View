@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -66,7 +65,6 @@ public class CalendarView extends LinearLayout {
     private TextView mCurrentMonthLabel;
     private int mCurrentPage;
     private CalendarViewPager mViewPager;
-    private boolean changedPage = false;
 
     private CalendarProperties mCalendarProperties;
 
@@ -263,19 +261,11 @@ public class CalendarView extends LinearLayout {
 
             if (!isScrollingLimited(calendar, position)) {
                 setHeaderName(calendar, position);
-                changedPage = true;
             }
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                if (changedPage) {
-                    Log.d("CalendarView", "Page change");
-                    changedPage = false;
-                }
-            }
-        }
+        public void onPageScrollStateChanged(int state) {}
     };
 
     private boolean isScrollingLimited(Calendar calendar, int position) {
@@ -360,7 +350,7 @@ public class CalendarView extends LinearLayout {
      * Refreshes calendar pages if events have changed
      */
     public void notifyDataSetChanged() {
-        mCalendarPageAdapter.notifyDataSetChanged();
+        mCalendarPageAdapter.refreshEvents();
     }
 
     /**

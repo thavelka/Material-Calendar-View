@@ -65,10 +65,9 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> implements AdapterVie
         }
     }
 
-    @Override
-    public void notifyDataSetChanged() {
+    public void refreshEvents() {
         getEventDays();
-        super.notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     @NonNull
