@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.R;
 import com.applandeo.materialcalendarview.extensions.CalendarGridView;
-import com.applandeo.materialcalendarview.listeners.DayRowClickListener;
 import com.applandeo.materialcalendarview.utils.CalendarProperties;
 import com.applandeo.materialcalendarview.utils.SelectedDay;
 
@@ -40,6 +39,7 @@ public class CalendarPageAdapter extends PagerAdapter {
     private CalendarProperties mCalendarProperties;
 
     private int mPageMonth;
+    private ViewGroup mContainer;
 
     public CalendarPageAdapter(Context context, CalendarProperties calendarProperties) {
         mContext = context;
@@ -67,13 +67,11 @@ public class CalendarPageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        if (mContainer == null) mContainer = container;
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mCalendarGridView = (CalendarGridView) inflater.inflate(R.layout.calendar_view_grid, null);
 
         loadMonth(position);
-
-        mCalendarGridView.setOnItemClickListener(new DayRowClickListener(this,
-                mCalendarProperties, mPageMonth));
 
         container.addView(mCalendarGridView);
         return mCalendarGridView;
@@ -154,10 +152,27 @@ public class CalendarPageAdapter extends PagerAdapter {
                 mCalendarProperties, days, mPageMonth);
 
         mCalendarGridView.setAdapter(calendarDayAdapter);
+        mCalendarGridView.setOnItemClickListener(calendarDayAdapter);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        if (mContainer != null) {
+            for (int i = 0; i < mContainer.getChildCount(); i++) {
+                View child = mContainer.getChildAt(i);
+                if (child instanceof CalendarGridView && ((CalendarGridView) child).getAdapter() != null) {
+                    ((CalendarDayAdapter) ((CalendarGridView) child).getAdapter()).notifyDataSetChanged();
+                }
+            }
+        }
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+        if (object instanceof CalendarGridView) {
+            ((CalendarGridView) object).setAdapter(null);
+            ((CalendarGridView) object).setOnItemClickListener(null);
+        }
         container.removeView((View) object);
     }
 }

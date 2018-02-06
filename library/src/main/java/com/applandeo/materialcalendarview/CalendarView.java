@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.annimon.stream.Stream;
 import com.applandeo.materialcalendarview.adapters.CalendarPageAdapter;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 import com.applandeo.materialcalendarview.extensions.CalendarViewPager;
+import com.applandeo.materialcalendarview.listeners.EventDaySource;
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.utils.AppearanceUtils;
@@ -64,6 +66,7 @@ public class CalendarView extends LinearLayout {
     private TextView mCurrentMonthLabel;
     private int mCurrentPage;
     private CalendarViewPager mViewPager;
+    private boolean changedPage = false;
 
     private CalendarProperties mCalendarProperties;
 
@@ -260,11 +263,18 @@ public class CalendarView extends LinearLayout {
 
             if (!isScrollingLimited(calendar, position)) {
                 setHeaderName(calendar, position);
+                changedPage = true;
             }
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
+            if (state == ViewPager.SCROLL_STATE_IDLE) {
+                if (changedPage) {
+                    Log.d("CalendarView", "Page change");
+                    changedPage = false;
+                }
+            }
         }
     };
 
@@ -347,17 +357,10 @@ public class CalendarView extends LinearLayout {
     }
 
     /**
-     * This method is used to set a list of events displayed in calendar cells,
-     * visible as images under the day number.
-     *
-     * @param eventDays List of EventDay objects
-     * @see EventDay
+     * Refreshes calendar pages if events have changed
      */
-    public void setEvents(List<EventDay> eventDays) {
-        if (mCalendarProperties.getEventsEnabled()) {
-            mCalendarProperties.setEventDays(eventDays);
-            mCalendarPageAdapter.notifyDataSetChanged();
-        }
+    public void notifyDataSetChanged() {
+        mCalendarPageAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -411,6 +414,17 @@ public class CalendarView extends LinearLayout {
      */
     public void setMaximumDate(Calendar calendar) {
         mCalendarProperties.setMaximumDate(calendar);
+    }
+
+    /**
+     * Sets the callback to provide the list of events displayed in calendar cells,
+     * visible as images under the day number.
+     *
+     * @param source Callback providing a list of EventDays for each calendar page
+     * @see EventDay
+     */
+    public void setEventSource(EventDaySource source) {
+        mCalendarProperties.setEventDaySource(source);
     }
 
     /**

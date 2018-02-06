@@ -5,8 +5,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
 import com.annimon.stream.Stream;
-import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.R;
+import com.applandeo.materialcalendarview.listeners.EventDaySource;
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
@@ -42,7 +42,7 @@ public class CalendarProperties {
     private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
     private OnCalendarPageChangeListener mOnForwardPageChangeListener;
 
-    private List<EventDay> mEventDays = new ArrayList<>();
+    private EventDaySource mEventDaySource;
     private List<Calendar> mDisabledDays = new ArrayList<>();
 
     private Context mContext;
@@ -219,14 +219,6 @@ public class CalendarProperties {
         mOnDayClickListener = onDayClickListener;
     }
 
-    public List<EventDay> getEventDays() {
-        return mEventDays;
-    }
-
-    public void setEventDays(List<EventDay> eventDays) {
-        mEventDays = eventDays;
-    }
-
     public List<Calendar> getDisabledDays() {
         return mDisabledDays;
     }
@@ -308,5 +300,13 @@ public class CalendarProperties {
 
     public void setAnotherMonthsDaysLabelsColor(int anotherMonthsDaysLabelsColor) {
         mAnotherMonthsDaysLabelsColor = anotherMonthsDaysLabelsColor;
+    }
+
+    public EventDaySource getEventDaySource() {
+        return mEventDaySource;
+    }
+
+    public void setEventDaySource(EventDaySource source) {
+        mEventDaySource = source;
     }
 }

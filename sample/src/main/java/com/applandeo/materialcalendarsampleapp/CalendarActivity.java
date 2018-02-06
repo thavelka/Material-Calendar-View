@@ -49,8 +49,7 @@ public class CalendarActivity extends AppCompatActivity {
 
         calendarView.setMinimumDate(min);
         calendarView.setMaximumDate(max);
-
-        calendarView.setEvents(events);
+        calendarView.setEventSource((start, end) -> events);
 
         calendarView.setDisabledDays(getDisabledDays());
 
