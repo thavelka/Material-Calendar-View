@@ -17,7 +17,7 @@ import java.util.List;
 
 public final class AppearanceUtils {
 
-    public static void setAbbreviationsLabels(View view, int color, int firstDayOfWeek) {
+    public static void setAbbreviationsLabels(View view, int appearance, int color, int firstDayOfWeek) {
 
         List<TextView> labels = new ArrayList<>();
         labels.add((TextView) view.findViewById(R.id.mondayLabel));
@@ -32,6 +32,7 @@ public final class AppearanceUtils {
         for (int i = 0; i < 7; i++) {
             TextView label = labels.get(i);
             label.setText(abbreviations[(i + firstDayOfWeek - 1) % 7]);
+            if (appearance != 0) label.setTextAppearance(label.getContext(), appearance);
             if (color != 0) label.setTextColor(color);
         }
     }
@@ -45,12 +46,14 @@ public final class AppearanceUtils {
         mCalendarHeader.setBackgroundColor(color);
     }
 
-    public static void setHeaderLabelColor(View view, int color) {
-        if (color == 0) {
-            return;
+    public static void setHeaderLabelColor(View view, int appearance, int color) {
+        TextView headerLabel = (TextView) view.findViewById(R.id.currentDateLabel);
+        if (appearance != 0) {
+            headerLabel.setTextAppearance(headerLabel.getContext(), appearance);
         }
-
-        ((TextView) view.findViewById(R.id.currentDateLabel)).setTextColor(color);
+        if (color != 0) {
+            headerLabel.setTextColor(color);
+        }
     }
 
     public static void setAbbreviationsBarColor(View view, int color) {

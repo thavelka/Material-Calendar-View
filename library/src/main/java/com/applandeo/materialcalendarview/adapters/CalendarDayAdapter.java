@@ -77,6 +77,12 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> implements AdapterVie
             view = mLayoutInflater.inflate(mCalendarProperties.getItemLayoutResource(), parent, false);
         }
 
+        // Set alternate week background if set
+        int alternateWeekColor = mCalendarProperties.getAlternateWeekColor();
+        if (alternateWeekColor != 0 && (position / 7) % 2 != 0) {
+            view.setBackgroundColor(alternateWeekColor);
+        }
+
         TextView dayLabel = (TextView) view.findViewById(R.id.dayLabel);
         ImageView dayIcon = (ImageView) view.findViewById(R.id.dayIcon);
 
@@ -97,7 +103,8 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> implements AdapterVie
     private void setLabelColors(TextView dayLabel, Calendar day) {
         // Setting not current month day color
         if (!isCurrentMonthDay(day)) {
-            DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
+            DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getAnotherMonthsDaysLabelsTextAppearance(),
+                    mCalendarProperties.getAnotherMonthsDaysLabelsColor(),
                     Typeface.NORMAL, R.drawable.background_transparent);
             return;
         }
@@ -114,7 +121,8 @@ public class CalendarDayAdapter extends ArrayAdapter<Date> implements AdapterVie
 
         // Setting disabled days color
         if (!isActiveDay(day)) {
-            DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getDisabledDaysLabelsColor(),
+            DayColorsUtils.setDayColors(dayLabel, mCalendarProperties.getDisabledDaysLabelsTextAppearance(),
+                    mCalendarProperties.getDisabledDaysLabelsColor(),
                     Typeface.NORMAL, R.drawable.background_transparent);
             return;
         }

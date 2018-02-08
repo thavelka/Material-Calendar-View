@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="row_height">44dp</dimen>
-    <dimen name="day_label_size_events_enabled">30dp</dimen>
-    <dimen name="day_label_size_events_disabled">38dp</dimen>
+    <dimen name="material_calendar_text_padding_event">6dp</dimen>
+    <dimen name="material_calendar_text_padding_no_event">9dp</dimen>
 </resources>
