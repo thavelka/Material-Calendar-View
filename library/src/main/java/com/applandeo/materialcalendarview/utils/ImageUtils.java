@@ -2,8 +2,6 @@ package com.applandeo.materialcalendarview.utils;
 
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
 /**
  * This class is used to load event image in a day cell
  * <p>
@@ -23,7 +21,6 @@ public class ImageUtils {
         if (resource == 0) {
             return;
         }
-
-        Picasso.get().load(resource).into(imageView);
+        imageView.setImageResource(resource);
     }
 }
