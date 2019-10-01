@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 
-public class SquareTextView extends android.support.v7.widget.AppCompatTextView {
+public class SquareTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public SquareTextView(Context context) {
         super(context);

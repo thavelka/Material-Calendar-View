@@ -1,9 +1,10 @@
 package com.applandeo.materialcalendarview.extensions;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by Mateusz Kornakiewicz on 21.11.2017.
@@ -26,7 +27,7 @@ public class CalendarViewPager extends ViewPager {
 
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            child.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+            child.measure(widthMeasureSpec, View.MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 
             int h = child.getMeasuredHeight();
 

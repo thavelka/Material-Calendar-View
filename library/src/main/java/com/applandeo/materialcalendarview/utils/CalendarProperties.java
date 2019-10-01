@@ -2,8 +2,8 @@ package com.applandeo.materialcalendarview.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.StyleRes;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.StyleRes;
+import androidx.core.content.ContextCompat;
 
 import com.annimon.stream.Stream;
 import com.applandeo.materialcalendarview.R;
