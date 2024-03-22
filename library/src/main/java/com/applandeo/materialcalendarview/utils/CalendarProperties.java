@@ -2,11 +2,12 @@ package com.applandeo.materialcalendarview.utils;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 
 import com.annimon.stream.Stream;
-import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.R;
+import com.applandeo.materialcalendarview.listeners.EventDaySource;
 import com.applandeo.materialcalendarview.listeners.OnCalendarPageChangeListener;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.applandeo.materialcalendarview.listeners.OnSelectDateListener;
@@ -25,8 +26,13 @@ import java.util.List;
 public class CalendarProperties {
     private int mCalendarType, mHeaderColor, mHeaderLabelColor, mSelectionColor, mTodayLabelColor,
             mDialogButtonsColor, mItemLayoutResource, mDisabledDaysLabelsColor, mPagesColor,
-            mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor, mSelectionLabelColor,
-            mAnotherMonthsDaysLabelsColor;
+            mAlternateWeekColor, mAbbreviationsBarColor, mAbbreviationsLabelsColor, mDaysLabelsColor,
+            mSelectionLabelColor, mAnotherMonthsDaysLabelsColor, mHeaderLabelTextAppearance,
+            mAbbreviationsLabelsTextAppearance, mDaysLabelsTextAppearance,
+            mAnotherMonthsDaysLabelsTextAppearance, mTodayLabelTextAppearance,
+            mSelectionLabelTextAppearance, mDisabledDaysLabelsTextAppearance;
+
+    private boolean mEventsEnabled;
 
     private Drawable mPreviousButtonSrc, mForwardButtonSrc;
 
@@ -40,7 +46,7 @@ public class CalendarProperties {
     private OnCalendarPageChangeListener mOnPreviousPageChangeListener;
     private OnCalendarPageChangeListener mOnForwardPageChangeListener;
 
-    private List<EventDay> mEventDays = new ArrayList<>();
+    private EventDaySource mEventDaySource;
     private List<Calendar> mDisabledDays = new ArrayList<>();
 
     private Context mContext;
@@ -55,6 +61,14 @@ public class CalendarProperties {
 
     public void setCalendarType(int calendarType) {
         mCalendarType = calendarType;
+    }
+
+    public boolean getEventsEnabled() {
+        return mEventsEnabled;
+    }
+
+    public void setEventsEnabled(boolean eventsEnabled) {
+        mEventsEnabled = eventsEnabled;
     }
 
     public Calendar getCalendar() {
@@ -209,14 +223,6 @@ public class CalendarProperties {
         mOnDayClickListener = onDayClickListener;
     }
 
-    public List<EventDay> getEventDays() {
-        return mEventDays;
-    }
-
-    public void setEventDays(List<EventDay> eventDays) {
-        mEventDays = eventDays;
-    }
-
     public List<Calendar> getDisabledDays() {
         return mDisabledDays;
     }
@@ -298,5 +304,77 @@ public class CalendarProperties {
 
     public void setAnotherMonthsDaysLabelsColor(int anotherMonthsDaysLabelsColor) {
         mAnotherMonthsDaysLabelsColor = anotherMonthsDaysLabelsColor;
+    }
+
+    public int getAlternateWeekColor() {
+        return mAlternateWeekColor;
+    }
+
+    public void setAlternateWeekColor(int alternateWeekColor) {
+        mAlternateWeekColor = alternateWeekColor;
+    }
+
+    public int getHeaderLabelTextAppearance() {
+        return mHeaderLabelTextAppearance;
+    }
+
+    public void setHeaderLabelTextAppearance(@StyleRes int headerLabelTextAppearance) {
+        mHeaderLabelTextAppearance = headerLabelTextAppearance;
+    }
+
+    public int getAbbreviationsLabelsTextAppearance() {
+        return mAbbreviationsLabelsTextAppearance;
+    }
+
+    public void setAbbreviationsLabelsTextAppearance(@StyleRes int abbreviationsLabelsTextAppearance) {
+        mAbbreviationsLabelsTextAppearance = abbreviationsLabelsTextAppearance;
+    }
+
+    public int getDaysLabelsTextAppearance() {
+        return mDaysLabelsTextAppearance;
+    }
+
+    public void setDaysLabelsTextAppearance(@StyleRes int daysLabelsTextAppearance) {
+        mDaysLabelsTextAppearance = daysLabelsTextAppearance;
+    }
+
+    public int getAnotherMonthsDaysLabelsTextAppearance() {
+        return mAnotherMonthsDaysLabelsTextAppearance;
+    }
+
+    public void setAnotherMonthsDaysLabelsTextAppearance(@StyleRes int anotherMonthsDaysLabelsTextAppearance) {
+        mAnotherMonthsDaysLabelsTextAppearance = anotherMonthsDaysLabelsTextAppearance;
+    }
+
+    public int getTodayLabelTextAppearance() {
+        return mTodayLabelTextAppearance;
+    }
+
+    public void setTodayLabelTextAppearance(@StyleRes int todayLabelTextAppearance) {
+        mTodayLabelTextAppearance = todayLabelTextAppearance;
+    }
+
+    public int getSelectionLabelTextAppearance() {
+        return mSelectionLabelTextAppearance;
+    }
+
+    public void setSelectionLabelTextAppearance(@StyleRes int selectionLabelTextAppearance) {
+        mSelectionLabelTextAppearance = selectionLabelTextAppearance;
+    }
+
+    public int getDisabledDaysLabelsTextAppearance() {
+        return mDisabledDaysLabelsTextAppearance;
+    }
+
+    public void setDisabledDaysLabelsTextAppearance(@StyleRes int disabledDaysLabelsTextAppearance) {
+        mDisabledDaysLabelsTextAppearance = disabledDaysLabelsTextAppearance;
+    }
+
+    public EventDaySource getEventDaySource() {
+        return mEventDaySource;
+    }
+
+    public void setEventDaySource(EventDaySource source) {
+        mEventDaySource = source;
     }
 }

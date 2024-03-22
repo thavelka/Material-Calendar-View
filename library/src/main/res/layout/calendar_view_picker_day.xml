@@ -3,16 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/day_item_background"
+    android:padding="3dp"
     android:orientation="vertical">
 
-    <TextView
+    <com.applandeo.materialcalendarview.extensions.SquareTextView
         android:id="@+id/dayLabel"
-        android:layout_width="@dimen/row_height"
-        android:layout_height="@dimen/row_height"
-        android:layout_gravity="center"
-        android:padding="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/material_calendar_text_padding_no_event"
+        android:layout_marginTop="4dp"
         android:gravity="center"
-        android:textSize="14sp" />
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
 </LinearLayout>
 

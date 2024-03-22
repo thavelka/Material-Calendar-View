@@ -5,18 +5,23 @@
     android:background="@drawable/day_item_background"
     android:orientation="vertical">
 
-    <TextView
+    <com.applandeo.materialcalendarview.extensions.SquareTextView
         android:id="@+id/dayLabel"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/material_calendar_text_padding_event"
+        android:layout_marginTop="4dp"
         android:gravity="center"
-        android:textSize="14sp" />
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
 
     <ImageView
         android:id="@+id/dayIcon"
-        android:layout_width="16dp"
-        android:layout_height="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:scaleType="centerInside" />
 
     <View
